@@ -1,6 +1,5 @@
 import { ArrowRight, Compass, Lightbulb, Palette, Rocket, Target } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/sections/shared/navbar";
 import Footer from "@/components/sections/shared/footer";
 import Container from "@/components/container";
@@ -16,7 +15,6 @@ const services = [
 
 const Home = () => (
   <div className="min-h-screen bg-white text-[#000038]">
-    <Helmet><title>Criativa — Comunicação, Estratégia e Resultados</title><meta name="description" content="A Criativa combina comunicação, estratégia, criatividade e tecnologia para ajudar marcas e negócios a comunicar melhor e crescer com estratégia." /></Helmet>
     <Navbar />
     <main>
       <section className="bg-[#000038] text-white pt-40 pb-24 md:pt-48 md:pb-32"><Container><div className="max-w-5xl"><p className="text-sm font-bold uppercase tracking-[0.22em] text-[#EF203D]">CRIATIVA • COMUNICAÇÃO • ESTRATÉGIA • RESULTADOS</p><h1 className="mt-6 text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.98] tracking-tight">Marcas que comunicam melhor.<br /><span className="text-white/50">Negócios que crescem com estratégia.</span></h1><p className="mt-8 max-w-2xl text-lg md:text-xl text-white/60 leading-relaxed">A Criativa combina comunicação, estratégia, criatividade e tecnologia para ajudar empresas e organizações a posicionarem-se melhor, comunicarem com clareza e transformarem atenção em resultados.</p><div className="mt-9 flex flex-col sm:flex-row gap-4"><Button asChild size="lg" className="bg-[#EF203D] hover:bg-[#EF203D]/90"><Link to="/contact">Falar com a Criativa <ArrowRight className="ml-2" /></Link></Button><Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10"><a href="#sobre">Conhecer a Criativa</a></Button></div></div></Container></section>
