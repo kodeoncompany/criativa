@@ -20,6 +20,7 @@ import BlogDashboard from "./pages/dashboard/blog";
 import BlogEditor from "./pages/dashboard/blog/editor";
 import Features from "./pages/features";
 import Home from "./pages/home";
+import ComunicaSummit from "./pages/comunicasummit";
 import CookiePolicyPage from "./pages/legal/cookie-policy";
 import PrivacyPolicyPage from "./pages/legal/privacy-&-policy";
 import TermsAndConditionPage from "./pages/legal/terms-&-condition";
@@ -46,6 +47,7 @@ const App = () => (
           <AuthProvider>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/comunicasummit" element={<ComunicaSummit />} />
               <Route path="/company" element={<Company />} />
               <Route path="/features" element={<Features />} />
               <Route path="/pricing" element={<Pricing />} />
@@ -63,55 +65,19 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route
-                path="/dashboard/profile"
-                element={
-                  <ProtectedRoute>
-                    <ProfileSettings />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/dashboard/blog"
-                element={
-                  <AdminGuard>
-                    <BlogDashboard />
-                  </AdminGuard>
-                }
-              />
-              <Route
-                path="/dashboard/blog/new"
-                element={
-                  <AdminGuard>
-                    <BlogEditor />
-                  </AdminGuard>
-                }
-              />
-              <Route
-                path="/dashboard/blog/edit/:id"
-                element={
-                  <AdminGuard>
-                    <BlogEditor />
-                  </AdminGuard>
-                }
-              />
-              {/* Demo routes — static seed data, no auth or database */}
-              <Route
-                path="/demo/*"
-                element={
-                  <SeedDataProvider>
-                    <Routes>
-                      <Route index element={<Navigate to="/demo/dashboard/blog" replace />} />
-                      <Route path="dashboard" element={<Navigate to="/demo/dashboard/blog" replace />} />
-                      <Route path="dashboard/blog" element={<DemoBlogDashboard />} />
-                      <Route path="dashboard/blog/new" element={<DemoBlogEditor />} />
-                      <Route path="dashboard/blog/edit/:id" element={<DemoBlogEditor />} />
-                      <Route path="dashboard/profile" element={<DemoProfileSettings />} />
-                      <Route path="*" element={<Navigate to="/demo/dashboard/blog" replace />} />
-                    </Routes>
-                  </SeedDataProvider>
-                }
-              />
+              <Route path="/dashboard/profile" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
+              <Route path="/dashboard/blog" element={<AdminGuard><BlogDashboard /></AdminGuard>} />
+              <Route path="/dashboard/blog/new" element={<AdminGuard><BlogEditor /></AdminGuard>} />
+              <Route path="/dashboard/blog/edit/:id" element={<AdminGuard><BlogEditor /></AdminGuard>} />
+              <Route path="/demo/*" element={<SeedDataProvider><Routes>
+                <Route index element={<Navigate to="/demo/dashboard/blog" replace />} />
+                <Route path="dashboard" element={<Navigate to="/demo/dashboard/blog" replace />} />
+                <Route path="dashboard/blog" element={<DemoBlogDashboard />} />
+                <Route path="dashboard/blog/new" element={<DemoBlogEditor />} />
+                <Route path="dashboard/blog/edit/:id" element={<DemoBlogEditor />} />
+                <Route path="dashboard/profile" element={<DemoProfileSettings />} />
+                <Route path="*" element={<Navigate to="/demo/dashboard/blog" replace />} />
+              </Routes></SeedDataProvider>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AuthProvider>
