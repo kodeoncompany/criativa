@@ -1,8 +1,8 @@
 export const appConfig = {
-    name: "Revio",
-    description: "Revio is a payment processing platform that allows you to accept payments online and offline.",
-    url: "https://revio-template.lovable.dev",
-    logo: "/logo.svg",
-    favicon: "/favicon.ico",
-    ogImage: "/og-image.jpg",
-}
+  name: "Criativa",
+  description: "A Criativa combina comunicação, estratégia, criatividade e tecnologia para ajudar marcas e negócios a comunicar melhor e crescer com estratégia.",
+  url: "https://criativa.agency",
+  logo: "/images/common/logo.svg",
+  favicon: "/favicon.ico",
+  ogImage: "/og-image.jpg",
+};
