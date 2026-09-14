@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, Compass, Lightbulb, Palette, Rocket, Target } from "lucide-react";
+import { ArrowRight, Compass, Lightbulb, Palette, Rocket, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/sections/shared/navbar";
@@ -7,44 +7,26 @@ import Container from "@/components/container";
 import { Button } from "@/components/ui/button";
 
 const services = [
-  [Compass, "Estratégia & Consultoria", "Direcção estratégica, posicionamento e decisões de comunicação alinhadas ao negócio."],
-  [Palette, "Branding & Design", "Identidades, sistemas visuais e experiências de marca pensadas para gerar percepção e consistência."],
-  [Target, "Digital", "Websites, marketing digital, redes sociais e campanhas orientadas para atenção, confiança e conversão."],
-  [Lightbulb, "Conteúdo & Audiovisual", "Conteúdo que traduz ideias complexas em mensagens claras, relevantes e memoráveis."],
-  [Rocket, "Tecnologia & Automação", "Soluções digitais, automação e IA aplicadas para simplificar processos e acelerar resultados."],
+  { Icon: Compass, title: "Estratégia & Consultoria", description: "Direcção estratégica, posicionamento e decisões de comunicação alinhadas ao negócio." },
+  { Icon: Palette, title: "Branding & Design", description: "Identidades, sistemas visuais e experiências de marca pensadas para gerar percepção e consistência." },
+  { Icon: Target, title: "Digital", description: "Websites, marketing digital, redes sociais e campanhas orientadas para atenção, confiança e conversão." },
+  { Icon: Lightbulb, title: "Conteúdo & Audiovisual", description: "Conteúdo que traduz ideias complexas em mensagens claras, relevantes e memoráveis." },
+  { Icon: Rocket, title: "Tecnologia & Automação", description: "Soluções digitais, automação e IA aplicadas para simplificar processos e acelerar resultados." },
 ];
 
 const Home = () => (
   <div className="min-h-screen bg-white text-[#000038]">
-    <Helmet>
-      <title>Criativa — Comunicação, Estratégia e Resultados</title>
-      <meta name="description" content="A Criativa combina comunicação, estratégia, criatividade e tecnologia para ajudar marcas e negócios a comunicar melhor e crescer com estratégia." />
-    </Helmet>
+    <Helmet><title>Criativa — Comunicação, Estratégia e Resultados</title><meta name="description" content="A Criativa combina comunicação, estratégia, criatividade e tecnologia para ajudar marcas e negócios a comunicar melhor e crescer com estratégia." /></Helmet>
     <Navbar />
     <main>
-      <section className="bg-[#000038] text-white pt-40 pb-24 md:pt-48 md:pb-32">
-        <Container>
-          <div className="max-w-5xl">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#EF203D]">CRIATIVA • COMUNICAÇÃO • ESTRATÉGIA • RESULTADOS</p>
-            <h1 className="mt-6 text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.98] tracking-tight">Marcas que comunicam melhor.<br /><span className="text-white/50">Negócios que crescem com estratégia.</span></h1>
-            <p className="mt-8 max-w-2xl text-lg md:text-xl text-white/60 leading-relaxed">A Criativa combina comunicação, estratégia, criatividade e tecnologia para ajudar empresas e organizações a posicionarem-se melhor, comunicarem com clareza e transformarem atenção em resultados.</p>
-            <div className="mt-9 flex flex-col sm:flex-row gap-4"><Button asChild size="lg" className="bg-[#EF203D] hover:bg-[#EF203D]/90"><Link to="/contact">Falar com a Criativa <ArrowRight className="ml-2" /></Link></Button><Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10"><a href="#sobre">Conhecer a Criativa</a></Button></div>
-          </div>
-        </Container>
-      </section>
-
+      <section className="bg-[#000038] text-white pt-40 pb-24 md:pt-48 md:pb-32"><Container><div className="max-w-5xl"><p className="text-sm font-bold uppercase tracking-[0.22em] text-[#EF203D]">CRIATIVA • COMUNICAÇÃO • ESTRATÉGIA • RESULTADOS</p><h1 className="mt-6 text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.98] tracking-tight">Marcas que comunicam melhor.<br /><span className="text-white/50">Negócios que crescem com estratégia.</span></h1><p className="mt-8 max-w-2xl text-lg md:text-xl text-white/60 leading-relaxed">A Criativa combina comunicação, estratégia, criatividade e tecnologia para ajudar empresas e organizações a posicionarem-se melhor, comunicarem com clareza e transformarem atenção em resultados.</p><div className="mt-9 flex flex-col sm:flex-row gap-4"><Button asChild size="lg" className="bg-[#EF203D] hover:bg-[#EF203D]/90"><Link to="/contact">Falar com a Criativa <ArrowRight className="ml-2" /></Link></Button><Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10"><a href="#sobre">Conhecer a Criativa</a></Button></div></div></Container></section>
       <section id="sobre" className="py-24 md:py-32"><Container><div className="grid lg:grid-cols-2 gap-14 items-end"><div><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">SOBRE A CRIATIVA</p><h2 className="mt-4 text-4xl md:text-6xl font-semibold leading-tight">Não criamos apenas comunicação. Criamos direcção.</h2></div><div><p className="text-lg text-black/60 leading-relaxed">A Criativa é uma agência de comunicação e estratégia que ajuda empresas, instituições e marcas a comunicar com mais clareza, posicionar-se com mais força e crescer com decisões mais inteligentes. Unimos estratégia, criatividade, tecnologia e execução para transformar ideias em marcas relevantes e comunicação em resultados.</p><Link to="/company" className="inline-flex mt-7 items-center font-semibold text-[#EF203D]">Conheça a Criativa <ArrowRight className="ml-2 h-4 w-4" /></Link></div></div></Container></section>
-
-      <section className="bg-[#000038] py-24 text-white md:py-32"><Container><div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8"><div><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">O QUE FAZEMOS</p><h2 className="mt-4 text-4xl md:text-6xl font-semibold">Comunicação com direção.</h2></div><p className="max-w-md text-white/55">Não começamos pelo formato. Começamos pelo problema, pela estratégia e pelo resultado que a marca precisa alcançar.</p></div><div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-4">{services.map(([Icon, title, description]) => { const ServiceIcon = Icon as typeof Compass; return <article key={title as string} className="rounded-3xl border border-white/10 p-7 hover:bg-white/[0.04] transition-colors"><ServiceIcon className="text-[#EF203D]" /><h3 className="mt-10 text-xl font-semibold">{title as string}</h3><p className="mt-3 text-white/50 leading-relaxed">{description as string}</p></article>; })}</div></Container></section>
-
+      <section className="bg-[#000038] py-24 text-white md:py-32"><Container><div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8"><div><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">O QUE FAZEMOS</p><h2 className="mt-4 text-4xl md:text-6xl font-semibold">Comunicação com direcção.</h2></div><p className="max-w-md text-white/55">Não começamos pelo formato. Começamos pelo problema, pela estratégia e pelo resultado que a marca precisa alcançar.</p></div><div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-4">{services.map(({ Icon, title, description }) => <article key={title} className="rounded-3xl border border-white/10 p-7 hover:bg-white/[0.04] transition-colors"><Icon className="text-[#EF203D]" /><h3 className="mt-10 text-xl font-semibold">{title}</h3><p className="mt-3 text-white/50 leading-relaxed">{description}</p></article>)}</div></Container></section>
       <section className="py-24 md:py-32"><Container><div className="max-w-3xl"><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">PROCESSO</p><h2 className="mt-4 text-4xl md:text-6xl font-semibold">Da clareza à execução.</h2><p className="mt-5 text-lg text-black/55">Um processo simples para reduzir ruído, tomar melhores decisões e construir comunicação que faça sentido para o negócio.</p></div><div className="mt-14 grid md:grid-cols-5 gap-4">{['Diagnóstico','Estratégia','Criação','Execução','Optimização'].map((item, i) => <div key={item} className="border-t-2 border-[#000038] pt-5"><span className="text-sm font-bold text-[#EF203D]">0{i + 1}</span><h3 className="mt-3 text-xl font-semibold">{item}</h3></div>)}</div></Container></section>
-
       <section className="bg-[#F6F6F4] py-24 md:py-32"><Container><div className="rounded-[2rem] bg-[#000038] text-white p-8 md:p-14 flex flex-col lg:flex-row lg:items-center justify-between gap-10"><div className="max-w-2xl"><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">PRÓXIMO PASSO</p><h2 className="mt-4 text-4xl md:text-5xl font-semibold">Pronto para comunicar com mais estratégia?</h2><p className="mt-5 text-white/55 text-lg">A sua marca não precisa apenas de mais conteúdo. Precisa de uma direcção clara.</p></div><Button asChild size="lg" className="bg-[#EF203D] hover:bg-[#EF203D]/90 shrink-0"><Link to="/contact">Falar com a Criativa <ArrowRight className="ml-2" /></Link></Button></div></Container></section>
-
       <section className="py-16"><Container><Link to="/comunicasummit" className="group flex flex-col md:flex-row md:items-center justify-between gap-6 rounded-3xl border border-[#000038]/10 p-7 hover:border-[#EF203D]/40 transition-colors"><div><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">13 NOVEMBRO 2026 • CHIMOIO</p><h2 className="mt-2 text-2xl md:text-3xl font-semibold">COMUNICA SUMMIT — Storyselling</h2><p className="mt-2 text-black/50">A Arte de Ser Ouvido. Apenas 70 vagas.</p></div><span className="flex items-center font-semibold">Conhecer o Summit <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" /></span></Link></Container></section>
     </main>
     <Footer />
   </div>
 );
-
 export default Home;
