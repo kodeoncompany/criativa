@@ -1,146 +1,121 @@
-import { useState } from "react";
-import { ArrowDown, ArrowUpRight, ChevronDown, Instagram, Linkedin, Mail, Menu, Play, Plus, Send, X } from "lucide-react";
-
-const RED = "#EF203D";
-const NAVY = "#000038";
+import { FormEvent, useState } from "react";
+import { ChevronDown, Instagram, Linkedin, Mail, Menu, Minus, Plus, Send, X } from "lucide-react";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import visorAsset from "@/assets/criativa-visor.png.asset.json";
 
 const values = [
-  ["inovação", "em primeiro lugar"],
-  ["impacto", "mensurável"],
-  ["visão", "global"],
-  ["parceria", "verdadeira"],
+  { title: <>inovação<br />em primeiro<br />lugar</>, copy: "estamos sempre à frente, criando novas possibilidades." },
+  { title: <>impacto<br />mensurável</>, copy: "focamos em resultados reais que impulsionam o crescimento da sua marca." },
+  { title: <>visão<br />global</>, copy: "comunicação e design que transcendem fronteiras." },
+  { title: <>parceria<br />verdadeira</>, copy: "relações sólidas construídas com confiança e propósito." },
 ];
 
 const services = [
-  { value: "+73%", title: "branding e identidade", copy: "criamos marcas que comunicam com clareza, geram confiança e constroem reputação." },
-  { value: "+58%", title: "mídias sociais e marketing", copy: "estratégias de conteúdo que aproximam, envolvem e geram crescimento real." },
-  { value: "+67%", title: "marketing digital", copy: "campanhas inteligentes orientadas para atenção, conversão e resultados." },
-  { value: "+42%", title: "design de sites e UX/UI", copy: "sites modernos, rápidos e estratégicos que transformam visitantes em clientes." },
+  { value: "+73%", metric: "aumento do reconhecimento da marca", title: <>branding<br />e identidade</>, copy: "criamos marcas que comunicam com clareza, geram conexão e constroem reputação.", image: "visor" },
+  { value: "+58%", metric: "aumento de engajamento nas redes sociais", title: <>mídias<br />sociais e<br />marketing</>, copy: "estratégias de conteúdo que aproximam, envolvem e geram crescimento real.", image: "face" },
+  { value: "+67%", metric: "mais foco em conversões", title: <>marketing<br />digital</>, copy: "campanhas inteligentes orientadas para atenção, conversão e resultados.", image: "pillars" },
+  { value: "+42%", metric: "mais conversões em websites", title: <>design<br />de sites e<br />UX/UI</>, copy: "sites modernos, rápidos e estratégicos que convertem visitantes em clientes.", image: "flow" },
 ];
 
 const faqs = [
   ["quais serviços a nossa agência oferece?", "Oferecemos soluções completas em comunicação e marketing, incluindo branding, design gráfico, gestão de redes sociais, tráfego pago, criação de sites, produção audiovisual, consultoria estratégica, automação e inteligência artificial."],
-  ["quanto custa um projecto digital?", "O investimento depende do escopo, complexidade e objectivos do projecto. Depois de entendermos a necessidade, apresentamos uma proposta adequada."],
+  ["quanto custa um projecto digital?", "O investimento depende do escopo, da complexidade e dos objectivos do projecto. Depois de entendermos a necessidade, apresentamos uma proposta adequada."],
   ["vocês também gerenciam redes sociais?", "Sim. Trabalhamos estratégia, conteúdo, design, gestão e campanhas para redes sociais."],
   ["em quais setores vocês são especializados?", "Trabalhamos com diferentes sectores e adaptamos a estratégia ao contexto, público e objectivos de cada organização."],
-  ["como medem o sucesso das campanhas?", "Definimos indicadores antes da execução e acompanhamos alcance, atenção, engagement, leads, conversões e outros resultados relevantes."],
+  ["como medem o sucesso das campanhas?", "Definimos indicadores antes da execução e acompanhamos alcance, atenção, engagement, leads e conversões."],
 ];
 
-function CyberFigure() {
-  return <div className="cyber-figure" aria-label="Figura futurista">
-    <div className="cyber-halo" />
-    <div className="cyber-head">
-      <div className="visor"><span /><i /></div>
-      <div className="ear left" /><div className="ear right" />
-      <div className="nose" /><div className="lips" />
+const contactSchema = z.object({
+  name: z.string().trim().min(2).max(100),
+  phone: z.string().trim().min(7).max(30),
+  email: z.string().trim().email().max(255),
+  project: z.string().trim().min(5).max(500),
+});
+
+function BrandMark({ inverse = false }: { inverse?: boolean }) {
+  return <div className={`brand-mark${inverse ? " brand-mark-inverse" : ""}`}><span className="brand-ring" /><strong>AGÊNCIA<br />CRIATIVA</strong></div>;
+}
+
+function Header() {
+  const [open, setOpen] = useState(false);
+  return <header className="site-nav">
+    <BrandMark />
+    <nav className={open ? "nav-links open" : "nav-links"} aria-label="Navegação principal">
+      <a className="active" href="#inicio" onClick={() => setOpen(false)}>Início</a>
+      <a href="#servicos" onClick={() => setOpen(false)}>Serviços</a>
+      <a href="#contacto" onClick={() => setOpen(false)}>Contacto</a>
+    </nav>
+    <Button variant="outline" size="icon" className="menu-button" onClick={() => setOpen(!open)} aria-label={open ? "Fechar menu" : "Abrir menu"}>{open ? <X /> : <Menu />}</Button>
+  </header>;
+}
+
+function Hero() {
+  return <section id="inicio" className="hero-section">
+    <div className="flare flare-one" /><div className="flare flare-two" /><div className="flare flare-three" />
+    <div className="hero-topline reveal"><h1>design</h1><p>visuais ousados, modernos e futuristas que<br />captam a atenção e impulsionam o impacto<br />digital através da clareza, contraste e inovação.</p></div>
+    <div className="hero-stage">
+      <div className="hero-red-field" />
+      <div className="hero-word" aria-hidden="true">CRIATIVA</div>
+      <div className="hero-agency">AGÊNCIA</div>
+      <img className="hero-person" src={visorAsset.url} alt="Figura futurista com visor e auscultadores" />
+      <div className="hero-copy"><span className="orbit-icon" /><p>Ajudamos marcas visionárias a se destacar num mundo digital competitivo com criatividade estratégica e soluções que entregam resultados reais.</p><a href="#contacto" className="pill-button">Fale connosco</a></div>
+      <div className="project-badge"><div className="badge-window"><span /></div><b>100+</b><small>PROJECTOS CONCLUÍDOS<br />COM SUCESSO</small></div>
+      <div className="social-rail"><a href="#contacto" aria-label="Instagram"><Instagram /></a><a href="#contacto" aria-label="Facebook">f</a><a href="#contacto" aria-label="LinkedIn"><Linkedin /></a><a href="mailto:ola@criativa.agency" aria-label="Email"><Mail /></a></div>
     </div>
-    <div className="cyber-neck" />
-  </div>;
+  </section>;
 }
 
-function ArcValue({ item, index }: { item: string[]; index: number }) {
-  return <div className={`value-wrap value-${index}`}>
-    <div className="value-arc"><span>{item[0]}<br />{item[1]}</span><b /></div>
-    <p>{index === 0 ? "estamos sempre à frente, criando novas possibilidades." : index === 1 ? "focamos em resultados reais que impulsionam o crescimento da sua marca." : index === 2 ? "comunicação e design que transcendem fronteiras." : "relações sólidas construídas com confiança e propósito."}</p>
-  </div>;
+function About() {
+  return <section className="about-section section-dark">
+    <div className="about-heading"><h2><span>quem</span><br />somos</h2><div className="about-copy"><div className="silk-mark" /><p>Somos uma agência de serviço completo que transforma ideias em resultados impactantes. Combinamos criatividade, estratégia e tecnologia para construir marcas fortes e fazê-las crescer.</p></div></div>
+    <div className="values-grid">{values.map((value, index) => <article className={`value-item value-${index}`} key={index}><div className="value-shape"><h3>{value.title}</h3><i /></div><p>{value.copy}</p></article>)}</div>
+  </section>;
 }
 
-function TeamCard({ name, role, large }: { name: string; role: string; large?: boolean }) {
-  return <article className={`team-card ${large ? "team-large" : ""}`}>
-    <div className="team-name">{name}</div>
-    <div className={`team-photo ${large ? "team-photo-large" : ""}`}><div className="portrait"><span /></div></div>
-    <strong>{role}</strong>
-    <p>responsável por transformar ideias em experiências relevantes e resultados para a agência.</p>
-  </article>;
+function Services() {
+  return <section id="servicos" className="services-section">
+    <div className="services-curve" />
+    <div className="services-inner">
+      <div className="services-head"><BrandMark inverse /><div><h2>nossos serviços</h2><p>Oferecemos soluções digitais completas — do branding e design ao marketing e desenvolvimento — para que sua marca cresça e se destaque.</p></div><span className="orbit-icon dark" /></div>
+      <div className="service-grid">{services.map((service, index) => <article className={`service-card service-${index}`} key={service.value}><div className={`service-art service-art-${service.image}`}>{service.image === "visor" && <img src={visorAsset.url} alt="" />}</div><strong>{service.value}</strong><small>{service.metric}</small><h3>{service.title}</h3><p>{service.copy}</p></article>)}</div>
+      <div className="laptop-scene"><div className="laptop-lid"><div className="laptop-display"><p>nós combinamos<br />estratégia, design<br />e código<br /><em>para impulsionar</em><br />marcas além<br />do limite</p><img src={visorAsset.url} alt="Figura futurista no ecrã do laptop" /></div></div><div className="keyboard"><div className="keys" /></div></div>
+      <p className="laptop-caption">onde design encontra estratégia<br />— criamos experiências que<br />geram destaque e performance.</p>
+    </div>
+  </section>;
 }
 
-const Home = () => {
-  const [openFaq, setOpenFaq] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
+const team = [
+  { name: <>Mauro<br />Janete</>, role: "DIRECTOR CRIATIVO", image: "/images/company/team/team-22.png" },
+  { name: <>Chando<br />Chimoio</>, role: "DIRECTOR GERAL", image: "/images/company/team/team-12.png", lead: true },
+  { name: <>Oldimiro<br />Munguambe</>, role: "DIRECTOR ADMINISTRATIVO", image: "/images/company/team/team-9.png" },
+];
 
-  return <div className="criativa-site">
-    <header className="site-nav">
-      <a className="nav-brand" href="#inicio">AGÊNCIA<br />CRIATIVA</a>
-      <nav className={menuOpen ? "nav-links open" : "nav-links"}>
-        <a href="#inicio" onClick={() => setMenuOpen(false)}>Início</a>
-        <a href="#servicos" onClick={() => setMenuOpen(false)}>Serviços</a>
-        <a href="#contacto" onClick={() => setMenuOpen(false)}>Contacto</a>
-      </nav>
-      <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">{menuOpen ? <X /> : <Menu />}</button>
-    </header>
+function Team() {
+  return <section className="team-section section-dark"><div className="team-note team-note-left">transformando<br />ideias em<br />resultados<br />através da<br />comunicação<br />e estratégia</div><div className="team-note team-note-right">performance<br />branding<br />marketing digital<br />desenvolvimento</div><div className="team-grid">{team.map((member) => <article className={`team-arch${member.lead ? " team-lead" : ""}`} key={member.role}><h3>{member.name}</h3><img src={member.image} alt={`${member.role} da Criativa`} /><div className="team-role"><strong>{member.role}</strong><p>responsável por liderar e desenvolver a visão criativa e operacional da agência.</p></div></article>)}</div></section>;
+}
 
-    <main>
-      <section id="inicio" className="hero-section">
-        <div className="blob blob-a" /><div className="blob blob-b" /><div className="blob blob-c" />
-        <div className="hero-topline">
-          <h1>design</h1>
-          <p>visuais ousados, modernos e futuristas que<br />captam a atenção e impulsionam o impacto<br />digital através da clareza, contraste e inovação.</p>
-        </div>
-        <div className="hero-stage">
-          <div className="hero-word">CRIATIVA</div>
-          <div className="hero-agency">AGÊNCIA</div>
-          <CyberFigure />
-          <div className="hero-copy">
-            <span className="mini-mark">◌</span>
-            <p>Ajudamos marcas visionárias a se destacar num mundo digital competitivo com criatividade estratégica e soluções que entregam resultados reais.</p>
-            <a href="#contacto" className="pill-button">Fale connosco <ArrowUpRight size={15} /></a>
-          </div>
-          <div className="project-badge"><div className="badge-art" /><b>100+</b><small>PROJECTOS CONCLUÍDOS<br />COM SUCESSO</small></div>
-          <div className="social-rail"><Instagram /><Linkedin /><Mail /></div>
-        </div>
-      </section>
+function FAQ() {
+  const [open, setOpen] = useState(0);
+  return <section className="faq-section section-dark"><div className="faq-heading"><h2>tudo o que<br /><span>você precisa</span><br /><span>saber</span></h2><div className="faq-sign"><span className="orbit-icon" /><b><em>Agência</em><br />Criativa</b></div></div><div className="faq-list">{faqs.map(([question, answer], index) => <article className={open === index ? "faq-item active" : "faq-item"} key={question}><Button variant="outline" onClick={() => setOpen(open === index ? -1 : index)} aria-expanded={open === index}><span>{question}</span><i>{open === index ? <Minus /> : <Plus />}</i></Button><div className="faq-answer"><p>{answer}</p></div></article>)}</div></section>;
+}
 
-      <section className="about-section section-dark">
-        <div className="section-heading">
-          <h2><span>quem</span><br />somos</h2>
-          <div className="section-description"><div className="swirl" /><p>Somos uma agência de serviço completo que transforma ideias em resultados impactantes. Combinamos criatividade, estratégia e tecnologia para construir marcas fortes e fazê-las crescer.</p></div>
-        </div>
-        <div className="values-grid">{values.map((v, i) => <ArcValue key={v[0]} item={v} index={i} />)}</div>
-      </section>
+function Contact() {
+  const [status, setStatus] = useState<"idle" | "error" | "success">("idle");
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    if (!contactSchema.safeParse(data).success) { setStatus("error"); return; }
+    setStatus("success"); form.reset();
+  };
+  return <section id="contacto" className="contact-section section-dark"><div className="contact-heading"><h2>a sua visão —<br /><span>a nossa missão</span></h2><div><p>Vamos transformar suas ideias em marcas que geram resultados.</p><div className="mini-visor"><img src={visorAsset.url} alt="" /></div></div></div><form className="contact-form" onSubmit={submit} noValidate><label><span>Nome</span><input name="name" placeholder="nome" maxLength={100} aria-label="Nome" /></label><label><span>Telefone</span><input name="phone" type="tel" placeholder="número de telefone" maxLength={30} aria-label="Número de telefone" /></label><label><span>Email</span><input name="email" type="email" placeholder="e-mail" maxLength={255} aria-label="E-mail" /></label><label><span>Projecto</span><input name="project" placeholder="fale-nos do projecto" maxLength={500} aria-label="Fale-nos do projecto" /></label><Button type="submit" className="pill-button">enviar solicitação <Send /></Button><small><i /> ao enviar este formulário, você concorda com nossa política de privacidade.</small><p className={`form-status ${status}`}>{status === "success" ? "Solicitação enviada com sucesso." : status === "error" ? "Preencha correctamente todos os campos." : ""}</p></form></section>;
+}
 
-      <section id="servicos" className="services-section">
-        <div className="white-curve" />
-        <div className="services-inner">
-          <div className="services-label">AGÊNCIA<br />CRIATIVA</div>
-          <div className="services-title"><h2>nossos serviços</h2><p>oferecemos soluções digitais completas — do branding e design ao marketing e desenvolvimento — para que sua marca cresça e se destaque.</p></div>
-          <div className="service-grid">{services.map((s, i) => <article className={`service-card service-${i}`} key={s.title}><div className="service-image"><div className="service-glow" /></div><b>{s.value}</b><span>{i === 0 ? "aumento do reconhecimento da marca" : i === 1 ? "aumento de engagement nas redes sociais" : i === 2 ? "mais foco em conversões" : "mais conversões em websites"}</span><h3>{s.title}</h3><p>{s.copy}</p></article>)}</div>
-        </div>
-        <div className="laptop-wrap"><div className="laptop-screen"><span>nós combinamos<br />estratégia, design<br />e código<br /><em>para impulsionar</em><br />marcas além<br />do limite</span><CyberFigure /></div><div className="laptop-base" /></div>
-        <p className="laptop-caption">onde design encontra estratégia<br />— criamos experiências que<br />geram destaque e performance.</p>
-      </section>
+function Footer() {
+  return <footer className="site-footer section-dark"><div className="footer-glow" /><div className="footer-geometry"><span /><i /></div><div className="footer-top"><div>trabalhos<br />estúdio<br />contacto</div><p>Agência Criativa é movida pela paixão em criar soluções que conectam marcas ao seu público com estratégia, criatividade e tecnologia.</p></div><div className="footer-brand">CRIATIVA</div><div className="footer-bottom"><div><a href="#inicio">início</a><a href="#servicos">serviços</a><a href="#contacto">contacto</a></div><div className="footer-social"><Instagram /><span>f</span><Linkedin /><Mail /></div><b>2026</b></div></footer>;
+}
 
-      <section className="team-section section-dark">
-        <div className="team-side-note">transformando<br />ideias em<br />resultados<br />através da<br />comunicação<br />e estratégia</div>
-        <div className="team-side-note right">performance<br />branding<br />marketing digital<br />desenvolvimento</div>
-        <div className="team-grid">
-          <TeamCard name="Mauro Janete" role="DIRECTOR CRIATIVO" />
-          <TeamCard name="Chando Chimoio" role="DIRECTOR GERAL" large />
-          <TeamCard name="Oldimiro Munguambe" role="DIRECTOR ADMINISTRATIVO" />
-        </div>
-      </section>
-
-      <section className="faq-section section-dark">
-        <div className="faq-heading"><h2>tudo o que<br /><span>você precisa</span><br /><span>saber</span></h2><div className="faq-mark">AGÊNCIA<br /><b>CRIATIVA</b></div></div>
-        <div className="faq-list">{faqs.map(([q, a], i) => <div className={openFaq === i ? "faq-item active" : "faq-item"} key={q}><button onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{q}</span>{openFaq === i ? <ChevronDown /> : <Plus />}</button>{openFaq === i && <div className="faq-answer">{a}</div>}</div>)}</div>
-      </section>
-
-      <section id="contacto" className="contact-section section-dark">
-        <div className="contact-heading"><h2>a sua visão —<br /><span>a nossa missão</span></h2><p>vamos transformar suas ideias em marcas que geram resultados.</p></div>
-        <form className="contact-form" onSubmit={e => e.preventDefault()}>
-          <input placeholder="nome" /><input placeholder="número de telefone" /><input type="email" placeholder="e-mail" /><input placeholder="sobre o projecto" />
-          <button className="pill-button" type="submit">enviar solicitação <Send size={15} /></button>
-          <small><i /> ao enviar este formulário, você concorda com nossa política de privacidade.</small>
-        </form>
-      </section>
-    </main>
-
-    <footer className="site-footer section-dark">
-      <div className="footer-orbit" />
-      <div className="footer-top"><div>trabalhos<br />estúdio<br />contacto</div><p>Agência Criativa é movida pela paixão em criar soluções que conectam marcas ao seu público com estratégia, criatividade e tecnologia.</p></div>
-      <div className="footer-brand">CRIATIVA</div>
-      <div className="footer-bottom"><div>início &nbsp;&nbsp; serviços &nbsp;&nbsp; contacto</div><div className="footer-social"><Instagram /><Mail /><Linkedin /></div><b>2026</b></div>
-    </footer>
-  </div>;
-};
-
-export default Home;
+export default function Home() {
+  return <div className="criativa-site"><Header /><main><Hero /><About /><Services /><Team /><FAQ /><Contact /></main><Footer /></div>;
+}
