@@ -1,30 +1,146 @@
-import { ArrowRight, Compass, Lightbulb, Palette, Rocket, Target } from "lucide-react";
-import { Link } from "react-router-dom";
-import Navbar from "@/components/sections/shared/navbar";
-import Footer from "@/components/sections/shared/footer";
-import Container from "@/components/container";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { ArrowDown, ArrowUpRight, ChevronDown, Instagram, Linkedin, Mail, Menu, Play, Plus, Send, X } from "lucide-react";
 
-const services = [
-  { Icon: Compass, title: "Estratégia & Consultoria", description: "Direcção estratégica, posicionamento e decisões de comunicação alinhadas ao negócio." },
-  { Icon: Palette, title: "Branding & Design", description: "Identidades, sistemas visuais e experiências de marca pensadas para gerar percepção e consistência." },
-  { Icon: Target, title: "Digital", description: "Websites, marketing digital, redes sociais e campanhas orientadas para atenção, confiança e conversão." },
-  { Icon: Lightbulb, title: "Conteúdo & Audiovisual", description: "Conteúdo que traduz ideias complexas em mensagens claras, relevantes e memoráveis." },
-  { Icon: Rocket, title: "Tecnologia & Automação", description: "Soluções digitais, automação e IA aplicadas para simplificar processos e acelerar resultados." },
+const RED = "#EF203D";
+const NAVY = "#000038";
+
+const values = [
+  ["inovação", "em primeiro lugar"],
+  ["impacto", "mensurável"],
+  ["visão", "global"],
+  ["parceria", "verdadeira"],
 ];
 
-const Home = () => (
-  <div className="min-h-screen bg-white text-[#000038]">
-    <Navbar />
+const services = [
+  { value: "+73%", title: "branding e identidade", copy: "criamos marcas que comunicam com clareza, geram confiança e constroem reputação." },
+  { value: "+58%", title: "mídias sociais e marketing", copy: "estratégias de conteúdo que aproximam, envolvem e geram crescimento real." },
+  { value: "+67%", title: "marketing digital", copy: "campanhas inteligentes orientadas para atenção, conversão e resultados." },
+  { value: "+42%", title: "design de sites e UX/UI", copy: "sites modernos, rápidos e estratégicos que transformam visitantes em clientes." },
+];
+
+const faqs = [
+  ["quais serviços a nossa agência oferece?", "Oferecemos soluções completas em comunicação e marketing, incluindo branding, design gráfico, gestão de redes sociais, tráfego pago, criação de sites, produção audiovisual, consultoria estratégica, automação e inteligência artificial."],
+  ["quanto custa um projecto digital?", "O investimento depende do escopo, complexidade e objectivos do projecto. Depois de entendermos a necessidade, apresentamos uma proposta adequada."],
+  ["vocês também gerenciam redes sociais?", "Sim. Trabalhamos estratégia, conteúdo, design, gestão e campanhas para redes sociais."],
+  ["em quais setores vocês são especializados?", "Trabalhamos com diferentes sectores e adaptamos a estratégia ao contexto, público e objectivos de cada organização."],
+  ["como medem o sucesso das campanhas?", "Definimos indicadores antes da execução e acompanhamos alcance, atenção, engagement, leads, conversões e outros resultados relevantes."],
+];
+
+function CyberFigure() {
+  return <div className="cyber-figure" aria-label="Figura futurista">
+    <div className="cyber-halo" />
+    <div className="cyber-head">
+      <div className="visor"><span /><i /></div>
+      <div className="ear left" /><div className="ear right" />
+      <div className="nose" /><div className="lips" />
+    </div>
+    <div className="cyber-neck" />
+  </div>;
+}
+
+function ArcValue({ item, index }: { item: string[]; index: number }) {
+  return <div className={`value-wrap value-${index}`}>
+    <div className="value-arc"><span>{item[0]}<br />{item[1]}</span><b /></div>
+    <p>{index === 0 ? "estamos sempre à frente, criando novas possibilidades." : index === 1 ? "focamos em resultados reais que impulsionam o crescimento da sua marca." : index === 2 ? "comunicação e design que transcendem fronteiras." : "relações sólidas construídas com confiança e propósito."}</p>
+  </div>;
+}
+
+function TeamCard({ name, role, large }: { name: string; role: string; large?: boolean }) {
+  return <article className={`team-card ${large ? "team-large" : ""}`}>
+    <div className="team-name">{name}</div>
+    <div className={`team-photo ${large ? "team-photo-large" : ""}`}><div className="portrait"><span /></div></div>
+    <strong>{role}</strong>
+    <p>responsável por transformar ideias em experiências relevantes e resultados para a agência.</p>
+  </article>;
+}
+
+const Home = () => {
+  const [openFaq, setOpenFaq] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return <div className="criativa-site">
+    <header className="site-nav">
+      <a className="nav-brand" href="#inicio">AGÊNCIA<br />CRIATIVA</a>
+      <nav className={menuOpen ? "nav-links open" : "nav-links"}>
+        <a href="#inicio" onClick={() => setMenuOpen(false)}>Início</a>
+        <a href="#servicos" onClick={() => setMenuOpen(false)}>Serviços</a>
+        <a href="#contacto" onClick={() => setMenuOpen(false)}>Contacto</a>
+      </nav>
+      <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">{menuOpen ? <X /> : <Menu />}</button>
+    </header>
+
     <main>
-      <section className="bg-[#000038] text-white pt-40 pb-24 md:pt-48 md:pb-32"><Container><div className="max-w-5xl"><p className="text-sm font-bold uppercase tracking-[0.22em] text-[#EF203D]">CRIATIVA • COMUNICAÇÃO • ESTRATÉGIA • RESULTADOS</p><h1 className="mt-6 text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.98] tracking-tight">Marcas que comunicam melhor.<br /><span className="text-white/50">Negócios que crescem com estratégia.</span></h1><p className="mt-8 max-w-2xl text-lg md:text-xl text-white/60 leading-relaxed">A Criativa combina comunicação, estratégia, criatividade e tecnologia para ajudar empresas e organizações a posicionarem-se melhor, comunicarem com clareza e transformarem atenção em resultados.</p><div className="mt-9 flex flex-col sm:flex-row gap-4"><Button asChild size="lg" className="bg-[#EF203D] hover:bg-[#EF203D]/90"><Link to="/contact">Falar com a Criativa <ArrowRight className="ml-2" /></Link></Button><Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10"><a href="#sobre">Conhecer a Criativa</a></Button></div></div></Container></section>
-      <section id="sobre" className="py-24 md:py-32"><Container><div className="grid lg:grid-cols-2 gap-14 items-end"><div><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">SOBRE A CRIATIVA</p><h2 className="mt-4 text-4xl md:text-6xl font-semibold leading-tight">Não criamos apenas comunicação. Criamos direcção.</h2></div><div><p className="text-lg text-black/60 leading-relaxed">A Criativa é uma agência de comunicação e estratégia que ajuda empresas, instituições e marcas a comunicar com mais clareza, posicionar-se com mais força e crescer com decisões mais inteligentes. Unimos estratégia, criatividade, tecnologia e execução para transformar ideias em marcas relevantes e comunicação em resultados.</p><Link to="/company" className="inline-flex mt-7 items-center font-semibold text-[#EF203D]">Conheça a Criativa <ArrowRight className="ml-2 h-4 w-4" /></Link></div></div></Container></section>
-      <section className="bg-[#000038] py-24 text-white md:py-32"><Container><div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8"><div><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">O QUE FAZEMOS</p><h2 className="mt-4 text-4xl md:text-6xl font-semibold">Comunicação com direcção.</h2></div><p className="max-w-md text-white/55">Não começamos pelo formato. Começamos pelo problema, pela estratégia e pelo resultado que a marca precisa alcançar.</p></div><div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-4">{services.map(({ Icon, title, description }) => <article key={title} className="rounded-3xl border border-white/10 p-7 hover:bg-white/[0.04] transition-colors"><Icon className="text-[#EF203D]" /><h3 className="mt-10 text-xl font-semibold">{title}</h3><p className="mt-3 text-white/50 leading-relaxed">{description}</p></article>)}</div></Container></section>
-      <section className="py-24 md:py-32"><Container><div className="max-w-3xl"><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">PROCESSO</p><h2 className="mt-4 text-4xl md:text-6xl font-semibold">Da clareza à execução.</h2><p className="mt-5 text-lg text-black/55">Um processo simples para reduzir ruído, tomar melhores decisões e construir comunicação que faça sentido para o negócio.</p></div><div className="mt-14 grid md:grid-cols-5 gap-4">{['Diagnóstico','Estratégia','Criação','Execução','Optimização'].map((item, i) => <div key={item} className="border-t-2 border-[#000038] pt-5"><span className="text-sm font-bold text-[#EF203D]">0{i + 1}</span><h3 className="mt-3 text-xl font-semibold">{item}</h3></div>)}</div></Container></section>
-      <section className="bg-[#F6F6F4] py-24 md:py-32"><Container><div className="rounded-[2rem] bg-[#000038] text-white p-8 md:p-14 flex flex-col lg:flex-row lg:items-center justify-between gap-10"><div className="max-w-2xl"><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">PRÓXIMO PASSO</p><h2 className="mt-4 text-4xl md:text-5xl font-semibold">Pronto para comunicar com mais estratégia?</h2><p className="mt-5 text-white/55 text-lg">A sua marca não precisa apenas de mais conteúdo. Precisa de uma direcção clara.</p></div><Button asChild size="lg" className="bg-[#EF203D] hover:bg-[#EF203D]/90 shrink-0"><Link to="/contact">Falar com a Criativa <ArrowRight className="ml-2" /></Link></Button></div></Container></section>
-      <section className="py-16"><Container><Link to="/comunicasummit" className="group flex flex-col md:flex-row md:items-center justify-between gap-6 rounded-3xl border border-[#000038]/10 p-7 hover:border-[#EF203D]/40 transition-colors"><div><p className="text-sm font-bold uppercase tracking-[0.2em] text-[#EF203D]">13 NOVEMBRO 2026 • CHIMOIO</p><h2 className="mt-2 text-2xl md:text-3xl font-semibold">COMUNICA SUMMIT — Storyselling</h2><p className="mt-2 text-black/50">A Arte de Ser Ouvido. Apenas 70 vagas.</p></div><span className="flex items-center font-semibold">Conhecer o Summit <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" /></span></Link></Container></section>
+      <section id="inicio" className="hero-section">
+        <div className="blob blob-a" /><div className="blob blob-b" /><div className="blob blob-c" />
+        <div className="hero-topline">
+          <h1>design</h1>
+          <p>visuais ousados, modernos e futuristas que<br />captam a atenção e impulsionam o impacto<br />digital através da clareza, contraste e inovação.</p>
+        </div>
+        <div className="hero-stage">
+          <div className="hero-word">CRIATIVA</div>
+          <div className="hero-agency">AGÊNCIA</div>
+          <CyberFigure />
+          <div className="hero-copy">
+            <span className="mini-mark">◌</span>
+            <p>Ajudamos marcas visionárias a se destacar num mundo digital competitivo com criatividade estratégica e soluções que entregam resultados reais.</p>
+            <a href="#contacto" className="pill-button">Fale connosco <ArrowUpRight size={15} /></a>
+          </div>
+          <div className="project-badge"><div className="badge-art" /><b>100+</b><small>PROJECTOS CONCLUÍDOS<br />COM SUCESSO</small></div>
+          <div className="social-rail"><Instagram /><Linkedin /><Mail /></div>
+        </div>
+      </section>
+
+      <section className="about-section section-dark">
+        <div className="section-heading">
+          <h2><span>quem</span><br />somos</h2>
+          <div className="section-description"><div className="swirl" /><p>Somos uma agência de serviço completo que transforma ideias em resultados impactantes. Combinamos criatividade, estratégia e tecnologia para construir marcas fortes e fazê-las crescer.</p></div>
+        </div>
+        <div className="values-grid">{values.map((v, i) => <ArcValue key={v[0]} item={v} index={i} />)}</div>
+      </section>
+
+      <section id="servicos" className="services-section">
+        <div className="white-curve" />
+        <div className="services-inner">
+          <div className="services-label">AGÊNCIA<br />CRIATIVA</div>
+          <div className="services-title"><h2>nossos serviços</h2><p>oferecemos soluções digitais completas — do branding e design ao marketing e desenvolvimento — para que sua marca cresça e se destaque.</p></div>
+          <div className="service-grid">{services.map((s, i) => <article className={`service-card service-${i}`} key={s.title}><div className="service-image"><div className="service-glow" /></div><b>{s.value}</b><span>{i === 0 ? "aumento do reconhecimento da marca" : i === 1 ? "aumento de engagement nas redes sociais" : i === 2 ? "mais foco em conversões" : "mais conversões em websites"}</span><h3>{s.title}</h3><p>{s.copy}</p></article>)}</div>
+        </div>
+        <div className="laptop-wrap"><div className="laptop-screen"><span>nós combinamos<br />estratégia, design<br />e código<br /><em>para impulsionar</em><br />marcas além<br />do limite</span><CyberFigure /></div><div className="laptop-base" /></div>
+        <p className="laptop-caption">onde design encontra estratégia<br />— criamos experiências que<br />geram destaque e performance.</p>
+      </section>
+
+      <section className="team-section section-dark">
+        <div className="team-side-note">transformando<br />ideias em<br />resultados<br />através da<br />comunicação<br />e estratégia</div>
+        <div className="team-side-note right">performance<br />branding<br />marketing digital<br />desenvolvimento</div>
+        <div className="team-grid">
+          <TeamCard name="Mauro Janete" role="DIRECTOR CRIATIVO" />
+          <TeamCard name="Chando Chimoio" role="DIRECTOR GERAL" large />
+          <TeamCard name="Oldimiro Munguambe" role="DIRECTOR ADMINISTRATIVO" />
+        </div>
+      </section>
+
+      <section className="faq-section section-dark">
+        <div className="faq-heading"><h2>tudo o que<br /><span>você precisa</span><br /><span>saber</span></h2><div className="faq-mark">AGÊNCIA<br /><b>CRIATIVA</b></div></div>
+        <div className="faq-list">{faqs.map(([q, a], i) => <div className={openFaq === i ? "faq-item active" : "faq-item"} key={q}><button onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{q}</span>{openFaq === i ? <ChevronDown /> : <Plus />}</button>{openFaq === i && <div className="faq-answer">{a}</div>}</div>)}</div>
+      </section>
+
+      <section id="contacto" className="contact-section section-dark">
+        <div className="contact-heading"><h2>a sua visão —<br /><span>a nossa missão</span></h2><p>vamos transformar suas ideias em marcas que geram resultados.</p></div>
+        <form className="contact-form" onSubmit={e => e.preventDefault()}>
+          <input placeholder="nome" /><input placeholder="número de telefone" /><input type="email" placeholder="e-mail" /><input placeholder="sobre o projecto" />
+          <button className="pill-button" type="submit">enviar solicitação <Send size={15} /></button>
+          <small><i /> ao enviar este formulário, você concorda com nossa política de privacidade.</small>
+        </form>
+      </section>
     </main>
-    <Footer />
-  </div>
-);
+
+    <footer className="site-footer section-dark">
+      <div className="footer-orbit" />
+      <div className="footer-top"><div>trabalhos<br />estúdio<br />contacto</div><p>Agência Criativa é movida pela paixão em criar soluções que conectam marcas ao seu público com estratégia, criatividade e tecnologia.</p></div>
+      <div className="footer-brand">CRIATIVA</div>
+      <div className="footer-bottom"><div>início &nbsp;&nbsp; serviços &nbsp;&nbsp; contacto</div><div className="footer-social"><Instagram /><Mail /><Linkedin /></div><b>2026</b></div>
+    </footer>
+  </div>;
+};
+
 export default Home;
