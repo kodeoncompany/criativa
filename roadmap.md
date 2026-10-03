@@ -1,5 +1,5 @@
 # Criativa website
-- [ ] Reconstruct all reference sections and responsive compositions
-- [ ] Integrate supplied character and available team portraits
-- [ ] Implement FAQ, navigation, and validated contact form
-- [ ] Update metadata and validate desktop/mobile rendering
+- [x] Reconstruct all reference sections and responsive compositions
+- [x] Integrate supplied character and available team portraits
+- [x] Implement FAQ, navigation, and validated contact form
+- [x] Update metadata and validate desktop/mobile rendering
