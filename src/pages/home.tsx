@@ -2,7 +2,6 @@ import { FormEvent, useState } from "react";
 import { ChevronDown, Instagram, Linkedin, Mail, Menu, Minus, Plus, Send, X } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import visorAsset from "@/assets/criativa-visor.png.asset.json";
 
 const values = [
   { title: <>inovação<br />em primeiro<br />lugar</>, copy: "estamos sempre à frente, criando novas possibilidades." },
@@ -58,7 +57,7 @@ function Hero() {
       <div className="hero-red-field" />
       <div className="hero-word" aria-hidden="true">CRIATIVA</div>
       <div className="hero-agency">AGÊNCIA</div>
-      <img className="hero-person" src={visorAsset.url} alt="Figura futurista com visor e auscultadores" />
+      <img className="hero-person" src={"/images/criativa-visor.png"} alt="Figura futurista com visor e auscultadores" />
       <div className="hero-copy"><span className="orbit-icon" /><p>Ajudamos marcas visionárias a se destacar num mundo digital competitivo com criatividade estratégica e soluções que entregam resultados reais.</p><a href="#contacto" className="pill-button">Fale connosco</a></div>
       <div className="project-badge"><div className="badge-window"><span /></div><b>100+</b><small>PROJECTOS CONCLUÍDOS<br />COM SUCESSO</small></div>
       <div className="social-rail"><a href="#contacto" aria-label="Instagram"><Instagram /></a><a href="#contacto" aria-label="Facebook">f</a><a href="#contacto" aria-label="LinkedIn"><Linkedin /></a><a href="mailto:ola@criativa.agency" aria-label="Email"><Mail /></a></div>
@@ -78,8 +77,8 @@ function Services() {
     <div className="services-curve" />
     <div className="services-inner">
       <div className="services-head"><BrandMark inverse /><div><h2>nossos serviços</h2><p>Oferecemos soluções digitais completas — do branding e design ao marketing e desenvolvimento — para que sua marca cresça e se destaque.</p></div><span className="orbit-icon dark" /></div>
-      <div className="service-grid">{services.map((service, index) => <article className={`service-card service-${index}`} key={service.value}><div className={`service-art service-art-${service.image}`}>{service.image === "visor" && <img src={visorAsset.url} alt="" />}</div><strong>{service.value}</strong><small>{service.metric}</small><h3>{service.title}</h3><p>{service.copy}</p></article>)}</div>
-      <div className="laptop-scene"><div className="laptop-lid"><div className="laptop-display"><p>nós combinamos<br />estratégia, design<br />e código<br /><em>para impulsionar</em><br />marcas além<br />do limite</p><img src={visorAsset.url} alt="Figura futurista no ecrã do laptop" /></div></div><div className="keyboard"><div className="keys" /></div></div>
+      <div className="service-grid">{services.map((service, index) => <article className={`service-card service-${index}`} key={service.value}><div className={`service-art service-art-${service.image}`}>{service.image === "visor" && <img src={"/images/criativa-visor.png"} alt="" />}</div><strong>{service.value}</strong><small>{service.metric}</small><h3>{service.title}</h3><p>{service.copy}</p></article>)}</div>
+      <div className="laptop-scene"><div className="laptop-lid"><div className="laptop-display"><p>nós combinamos<br />estratégia, design<br />e código<br /><em>para impulsionar</em><br />marcas além<br />do limite</p><img src={"/images/criativa-visor.png"} alt="Figura futurista no ecrã do laptop" /></div></div><div className="keyboard"><div className="keys" /></div></div>
       <p className="laptop-caption">onde design encontra estratégia<br />— criamos experiências que<br />geram destaque e performance.</p>
     </div>
   </section>;
@@ -109,7 +108,7 @@ function Contact() {
     if (!contactSchema.safeParse(data).success) { setStatus("error"); return; }
     setStatus("success"); form.reset();
   };
-  return <section id="contacto" className="contact-section section-dark"><div className="contact-heading"><h2>a sua visão —<br /><span>a nossa missão</span></h2><div><p>Vamos transformar suas ideias em marcas que geram resultados.</p><div className="mini-visor"><img src={visorAsset.url} alt="" /></div></div></div><form className="contact-form" onSubmit={submit} noValidate><label><span>Nome</span><input name="name" placeholder="nome" maxLength={100} aria-label="Nome" /></label><label><span>Telefone</span><input name="phone" type="tel" placeholder="número de telefone" maxLength={30} aria-label="Número de telefone" /></label><label><span>Email</span><input name="email" type="email" placeholder="e-mail" maxLength={255} aria-label="E-mail" /></label><label><span>Projecto</span><input name="project" placeholder="fale-nos do projecto" maxLength={500} aria-label="Fale-nos do projecto" /></label><Button type="submit" className="pill-button">enviar solicitação <Send /></Button><small><i /> ao enviar este formulário, você concorda com nossa política de privacidade.</small><p className={`form-status ${status}`}>{status === "success" ? "Solicitação enviada com sucesso." : status === "error" ? "Preencha correctamente todos os campos." : ""}</p></form></section>;
+  return <section id="contacto" className="contact-section section-dark"><div className="contact-heading"><h2>a sua visão —<br /><span>a nossa missão</span></h2><div><p>Vamos transformar suas ideias em marcas que geram resultados.</p><div className="mini-visor"><img src={"/images/criativa-visor.png"} alt="" /></div></div></div><form className="contact-form" onSubmit={submit} noValidate><label><span>Nome</span><input name="name" placeholder="nome" maxLength={100} aria-label="Nome" /></label><label><span>Telefone</span><input name="phone" type="tel" placeholder="número de telefone" maxLength={30} aria-label="Número de telefone" /></label><label><span>Email</span><input name="email" type="email" placeholder="e-mail" maxLength={255} aria-label="E-mail" /></label><label><span>Projecto</span><input name="project" placeholder="fale-nos do projecto" maxLength={500} aria-label="Fale-nos do projecto" /></label><Button type="submit" className="pill-button">enviar solicitação <Send /></Button><small><i /> ao enviar este formulário, você concorda com nossa política de privacidade.</small><p className={`form-status ${status}`}>{status === "success" ? "Solicitação enviada com sucesso." : status === "error" ? "Preencha correctamente todos os campos." : ""}</p></form></section>;
 }
 
 function Footer() {
